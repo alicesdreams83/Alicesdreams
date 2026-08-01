@@ -1,0 +1,11 @@
+main  page
+other  page templates
+css templates
+javascript templates
+shop
+account
+about
+contact
+portfolio
+blog
+navigation

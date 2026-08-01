@@ -1,0 +1,373 @@
+/* ------------------------------
+   Portfolio page
+------------------------------ */
+
+.portfolio_Section {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+}
+
+.portfolio_Intro {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.portfolio_Intro h1 {
+    margin: 0 0 16px;
+    font-size: clamp(38px, 6vw, 64px);
+    color: #fff4bd;
+}
+
+.portfolio_Intro p {
+    margin: 0;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.portfolio_Categories {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+/* ------------------------------
+ /* ------------------------------
+   Portfolio category stars
+------------------------------ */
+
+.portfolio_Star {
+    width: 260px;
+    min-height: 250px;
+    margin: 0 auto;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    border: none;
+    background: transparent;
+
+    color: #fff4bd;
+    cursor: pointer;
+}
+
+
+/* Holds both halves in the same space */
+
+.star_Visual {
+    position: relative;
+
+    display: block;
+
+    width: 220px;
+    height: 180px;
+}
+
+
+/* Shared appearance of both star halves */
+
+.star_Half {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    font-size: 180px;
+    line-height: 1;
+
+    color: #6d52a8;
+
+    -webkit-text-stroke:
+        3px #d9b85f;
+
+    text-shadow:
+        0 0 12px rgba(255, 225, 130, 0.65),
+        0 0 28px rgba(129, 91, 220, 0.75);
+
+    transform:
+        translate(-50%, -50%);
+
+    transition:
+        transform 0.35s ease,
+        color 0.3s ease,
+        text-shadow 0.3s ease;
+}
+
+
+/* Show only the left side of this copy */
+
+.star_Left {
+    -webkit-clip-path:
+        inset(0 49.5% 0 0);
+
+    clip-path:
+        inset(0 49.5% 0 0);
+}
+
+
+/* Show only the right side of this copy */
+
+.star_Right {
+    -webkit-clip-path:
+        inset(0 0 0 49.5%);
+
+    clip-path:
+        inset(0 0 0 49.5%);
+}
+
+
+/* Category name */
+
+.star_Label {
+    position: relative;
+    z-index: 2;
+
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-align: center;
+
+    color: #ffffff;
+}
+
+
+/* Hover effect for the left half */
+
+.portfolio_Star:hover .star_Left,
+.portfolio_Star:focus-visible .star_Left {
+    color: #8066c0;
+
+    transform:
+        translate(
+            calc(-50% - 4px),
+            -50%
+        )
+        scale(1.05)
+        rotate(-2deg);
+
+    text-shadow:
+        0 0 18px rgba(255, 225, 130, 0.9),
+        0 0 42px rgba(129, 91, 220, 1);
+}
+
+
+/* Hover effect for the right half */
+
+.portfolio_Star:hover .star_Right,
+.portfolio_Star:focus-visible .star_Right {
+    color: #8066c0;
+
+    transform:
+        translate(
+            calc(-50% + 4px),
+            -50%
+        )
+        scale(1.05)
+        rotate(2deg);
+
+    text-shadow:
+        0 0 18px rgba(255, 225, 130, 0.9),
+        0 0 42px rgba(129, 91, 220, 1);
+}
+
+
+/* Keyboard focus outline */
+
+.portfolio_Star:focus-visible {
+    outline:
+        3px solid #fff4bd;
+
+    outline-offset: 8px;
+    border-radius: 24px;
+}
+
+/* ------------------------------
+   Opening filmstrip
+------------------------------ */
+
+.portfolio_Item {
+    --star-spread: clamp(150px, 34vw, 420px);
+
+    position: relative;
+    grid-column: 1 / -1;
+
+    width: 100%;
+    min-height: 290px;
+    overflow: hidden;
+}
+
+
+/* Let the star halves travel across the full section */
+
+.portfolio_Item .portfolio_Star {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+}
+
+.portfolio_Item .star_Visual {
+    width: 100%;
+}
+
+
+/* Filmstrip starts folded shut */
+
+.portfolio_Filmstrip {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    z-index: 1;
+
+    width: 0;
+    height: 180px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform: translateX(-50%);
+
+    transition:
+        width 0.55s ease,
+        opacity 0.3s ease;
+}
+
+
+/* Row containing the project cards */
+
+.filmstrip_Track {
+    height: 100%;
+    padding: 14px;
+
+    display: flex;
+    gap: 18px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    border-top: 5px dashed #d9b85f;
+    border-bottom: 5px dashed #d9b85f;
+
+    background-color: rgba(18, 11, 45, 0.92);
+
+    scrollbar-width: thin;
+}
+
+
+/* Individual project cards */
+
+.portfolio_Card {
+    flex: 0 0 190px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(217, 184, 95, 0.65);
+    border-radius: 12px;
+
+    background-color: #26164d;
+}
+
+.card_Image {
+    height: 105px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #6d52a8,
+            #30205d
+        );
+}
+
+.portfolio_Card h2 {
+    margin: 10px 0 0;
+
+    font-size: 16px;
+    text-align: center;
+
+    color: #fff4bd;
+}
+
+
+/* Open the filmstrip */
+
+.portfolio_Star.star_Open + .portfolio_Filmstrip {
+    width: min(760px, calc(100% - 300px));
+    opacity: 1;
+}
+
+
+/* Send the left half outward */
+
+.portfolio_Star.star_Open .star_Left {
+    transform:
+        translate(
+            calc(-50% - var(--star-spread)),
+            -50%
+        );
+}
+
+
+/* Send the right half outward */
+
+.portfolio_Star.star_Open .star_Right {
+    transform:
+        translate(
+            calc(-50% + var(--star-spread)),
+            -50%
+        );
+}
+
+
+/* Keep the open halves glowing */
+
+.portfolio_Star.star_Open .star_Half {
+    color: #8066c0;
+
+    text-shadow:
+        0 0 18px rgba(255, 225, 130, 0.9),
+        0 0 42px rgba(129, 91, 220, 1);
+}
+
+
+/* Smaller-screen adjustments */
+
+@media (max-width: 700px) {
+    .portfolio_Item {
+        --star-spread: clamp(105px, 30vw, 170px);
+    }
+
+    .portfolio_Star.star_Open + .portfolio_Filmstrip {
+        width: calc(100% - 190px);
+    }
+
+    .portfolio_Item .star_Half {
+        font-size: 135px;
+    }
+
+    .portfolio_Card {
+        flex-basis: 145px;
+    }
+}
+
+.card_Image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    object-fit: cover;
+
+    border-radius: 8px;
+}
