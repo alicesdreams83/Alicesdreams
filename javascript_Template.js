@@ -77,7 +77,7 @@ function setupNav() {
         sideMenu.classList.add("menu_Open");
 
         menuButton.setAttribute(
-            "aria_expanded",
+            "aria-expanded",
             "true"
         );
     });
@@ -86,7 +86,7 @@ function setupNav() {
         sideMenu.classList.remove("menu_Open");
 
         menuButton.setAttribute(
-            "aria_expanded",
+            "aria-expanded",
             "false"
         );
     });

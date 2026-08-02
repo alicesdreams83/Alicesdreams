@@ -104,10 +104,10 @@
 
 .star_Left {
     -webkit-clip-path:
-        inset(0 49.5% 0 0);
+        inset(0 49% 0 0);
 
     clip-path:
-        inset(0 49.5% 0 0);
+        inset(0 49% 0 0);
 }
 
 
@@ -115,10 +115,10 @@
 
 .star_Right {
     -webkit-clip-path:
-        inset(0 0 0 49.5%);
+        inset(0 0 0 49%);
 
     clip-path:
-        inset(0 0 0 49.5%);
+        inset(0 0 0 49%);
 }
 
 
@@ -136,47 +136,6 @@
     color: #ffffff;
 }
 
-
-/* Hover effect for the left half */
-
-.portfolio_Star:hover .star_Left,
-.portfolio_Star:focus-visible .star_Left {
-    color: #8066c0;
-
-    transform:
-        translate(
-            calc(-50% - 4px),
-            -50%
-        )
-        scale(1.05)
-        rotate(-2deg);
-
-    text-shadow:
-        0 0 18px rgba(255, 225, 130, 0.9),
-        0 0 42px rgba(129, 91, 220, 1);
-}
-
-
-/* Hover effect for the right half */
-
-.portfolio_Star:hover .star_Right,
-.portfolio_Star:focus-visible .star_Right {
-    color: #8066c0;
-
-    transform:
-        translate(
-            calc(-50% + 4px),
-            -50%
-        )
-        scale(1.05)
-        rotate(2deg);
-
-    text-shadow:
-        0 0 18px rgba(255, 225, 130, 0.9),
-        0 0 42px rgba(129, 91, 220, 1);
-}
-
-
 /* Keyboard focus outline */
 
 .portfolio_Star:focus-visible {
@@ -185,6 +144,17 @@
 
     outline-offset: 8px;
     border-radius: 24px;
+}
+
+/* Hover glow without separating the star */
+
+.portfolio_Star:hover .star_Half,
+.portfolio_Star:focus-visible .star_Half {
+    color: #8066c0;
+
+    text-shadow:
+        0 0 18px rgba(255, 225, 130, 0.9),
+        0 0 42px rgba(129, 91, 220, 1);
 }
 
 /* ------------------------------
