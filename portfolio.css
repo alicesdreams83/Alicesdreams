@@ -490,29 +490,55 @@ Mobile size.
 }
 
 
-/* Hide category title until hover or focus */
+/* Category title over the closed star */
 
 .star_Label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+
+    width: max-content;
+    max-width: 180px;
+
+    padding: 7px 14px;
+
+    border:
+        1px solid rgba(255, 225, 120, 0.8);
+
+    border-radius: 999px;
+
+    color: #fff3a6;
+
+    background:
+        rgba(35, 19, 70, 0.9);
+
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+
     opacity: 0;
-
-    transform:
-        translateY(-10px)
-        scale(0.96);
-
     pointer-events: none;
 
-    color: #fff4bd;
+    transform:
+        translate(-50%, -42%)
+        scale(0.88);
+
+    box-shadow:
+        0 0 0 rgba(255, 216, 80, 0);
 
     text-shadow:
         0 0 8px rgba(255, 225, 130, 0.75);
 
     transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        opacity 0.22s ease,
+        transform 0.28s ease,
+        box-shadow 0.28s ease;
 }
 
 
-/* Increase a closed star when hovered */
+/* Enlarge and gently lift a closed star */
 
 .portfolio_Star:not(.star_Open):not(.star_Closing):hover
 .star_Visual,
@@ -520,21 +546,35 @@ Mobile size.
 .portfolio_Star:not(.star_Open):not(.star_Closing):focus-visible
 .star_Visual {
     transform:
-        scale(1.14);
+        translateY(-4px)
+        scale(1.12);
 }
 
 
-/* Reveal category title */
+/* Reveal the title over a closed star */
 
-.portfolio_Star:hover .star_Label,
-.portfolio_Star:focus-visible .star_Label,
-.portfolio_Star.star_Open .star_Label,
-.portfolio_Star.star_Closing .star_Label {
+.portfolio_Star:not(.star_Open):not(.star_Closing):hover
+.star_Label,
+
+.portfolio_Star:not(.star_Open):not(.star_Closing):focus-visible
+.star_Label {
     opacity: 1;
 
     transform:
-        translateY(0)
+        translate(-50%, -50%)
         scale(1);
+
+    box-shadow:
+        0 0 14px rgba(255, 222, 104, 0.55),
+        0 0 28px rgba(111, 74, 176, 0.55);
+}
+
+
+/* Hide the overlay once the category opens */
+
+.portfolio_Star.star_Open .star_Label,
+.portfolio_Star.star_Closing .star_Label {
+    opacity: 0;
 }
 
 
@@ -1046,4 +1086,41 @@ body.viewer_Open {
             1px solid
             rgba(246, 216, 111, 0.35);
     }
+}
+/* ------------------------------
+   Animated closed-star glow
+------------------------------ */
+
+@keyframes star_Hover_Glow {
+    0% {
+        color: #fff0a0;
+
+        text-shadow:
+            0 0 10px rgba(255, 239, 158, 0.85),
+            0 0 22px rgba(255, 205, 67, 0.65),
+            0 0 38px rgba(183, 120, 25, 0.4);
+    }
+
+    100% {
+        color: #fff8c7;
+
+        text-shadow:
+            0 0 18px rgba(255, 250, 206, 1),
+            0 0 38px rgba(255, 217, 83, 0.95),
+            0 0 64px rgba(201, 139, 35, 0.7);
+    }
+}
+
+
+.portfolio_Star:not(.star_Open):not(.star_Closing):hover
+.star_Visual::before,
+
+.portfolio_Star:not(.star_Open):not(.star_Closing):focus-visible
+.star_Visual::before {
+    animation:
+        star_Hover_Glow
+        0.85s
+        ease-in-out
+        infinite
+        alternate;
 }
