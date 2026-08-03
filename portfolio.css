@@ -352,7 +352,7 @@ whenever the category is closed.
 */
 
 .star_Visual::before {
-    content: "★";
+    content: attr(data-symbol);
 
     position: absolute;
     top: 50%;
@@ -442,5 +442,155 @@ Mobile size.
 @media (max-width: 700px) {
     .portfolio_Item .star_Visual::before {
         font-size: 135px;
+    }
+}
+
+/* ------------------------------
+   Star colors and hover reveal
+------------------------------ */
+
+/* Smoothly enlarge the complete star area */
+
+.star_Visual {
+    transform-origin: center;
+    transition:
+        transform 0.3s ease;
+}
+
+
+/* Yellow and gold star appearance */
+
+.star_Half,
+.star_Visual::before {
+    color: #f6d86f;
+
+    -webkit-text-stroke:
+        3px #b88728;
+
+    text-shadow:
+        0 0 10px rgba(255, 226, 111, 0.75),
+        0 0 24px rgba(244, 187, 63, 0.55);
+}
+
+
+/* Keep open star halves yellow */
+
+.portfolio_Star.star_Open .star_Half,
+.portfolio_Star.star_Closing .star_Half {
+    color: #f6d86f;
+
+    text-shadow:
+        0 0 14px rgba(255, 230, 125, 0.85),
+        0 0 32px rgba(244, 187, 63, 0.7);
+}
+
+
+/* Hide category title until hover or focus */
+
+.star_Label {
+    opacity: 0;
+
+    transform:
+        translateY(-10px)
+        scale(0.96);
+
+    pointer-events: none;
+
+    color: #fff4bd;
+
+    text-shadow:
+        0 0 8px rgba(255, 225, 130, 0.75);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* Increase a closed star when hovered */
+
+.portfolio_Star:not(.star_Open):not(.star_Closing):hover
+.star_Visual,
+
+.portfolio_Star:not(.star_Open):not(.star_Closing):focus-visible
+.star_Visual {
+    transform:
+        scale(1.14);
+}
+
+
+/* Reveal category title */
+
+.portfolio_Star:hover .star_Label,
+.portfolio_Star:focus-visible .star_Label,
+.portfolio_Star.star_Open .star_Label,
+.portfolio_Star.star_Closing .star_Label {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* Brighter yellow hover glow */
+
+.portfolio_Star:hover .star_Visual::before,
+.portfolio_Star:focus-visible .star_Visual::before,
+.portfolio_Star:hover .star_Half,
+.portfolio_Star:focus-visible .star_Half {
+    color: #fff3a6;
+
+    text-shadow:
+        0 0 14px rgba(255, 246, 178, 1),
+        0 0 32px rgba(255, 210, 81, 0.95),
+        0 0 52px rgba(218, 155, 35, 0.65);
+}
+
+
+/* Slight size adjustment for the narrow sparkle */
+
+.star_Visual[data-symbol="✦"]::before,
+.star_Visual[data-symbol="✦"] .star_Half {
+    font-size: 165px;
+}
+
+
+/* Future six-point star option */
+
+.star_Visual[data-symbol="✶"]::before,
+.star_Visual[data-symbol="✶"] .star_Half {
+    font-size: 170px;
+}
+
+
+/* Mobile star sizes */
+
+@media (max-width: 700px) {
+    .portfolio_Item
+    .star_Visual[data-symbol="★"]::before,
+
+    .portfolio_Item
+    .star_Visual[data-symbol="★"]
+    .star_Half {
+        font-size: 135px;
+    }
+
+    .portfolio_Item
+    .star_Visual[data-symbol="✦"]::before,
+
+    .portfolio_Item
+    .star_Visual[data-symbol="✦"]
+    .star_Half {
+        font-size: 122px;
+    }
+
+    .portfolio_Item
+    .star_Visual[data-symbol="✶"]::before,
+
+    .portfolio_Item
+    .star_Visual[data-symbol="✶"]
+    .star_Half {
+        font-size: 128px;
     }
 }
