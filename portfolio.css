@@ -873,7 +873,9 @@ Visible keyboard focus.
 .viewer_Media video {
     display: block;
 
-    max-width: 100%;
+    width: min(100%, 900px);
+    height: auto;
+
     max-height:
         calc(100vh - 92px);
 
@@ -1023,9 +1025,11 @@ body.viewer_Open {
     }
 
     .viewer_Media img,
-    .viewer_Media video {
-        max-height: 48vh;
-    }
+.viewer_Media video {
+    width: 100%;
+    height: auto;
+    max-height: 48vh;
+}
 
     .viewer_Info {
         padding:
