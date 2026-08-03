@@ -347,8 +347,8 @@
 ------------------------------ */
 
 /*
-A single complete star is shown while closed.
-The clipped halves are only used during animation.
+The complete star is used
+whenever the category is closed.
 */
 
 .star_Visual::before {
@@ -379,15 +379,14 @@ The clipped halves are only used during animation.
     pointer-events: none;
 
     transition:
-        opacity 0s linear 0.35s,
         color 0.3s ease,
         text-shadow 0.3s ease;
 }
 
 
 /*
-The split halves are invisible after
-the star finishes closing.
+The split copies are hidden
+while the star is fully closed.
 */
 
 .star_Half {
@@ -396,43 +395,35 @@ the star finishes closing.
     transition:
         transform 0.35s ease,
         color 0.3s ease,
-        text-shadow 0.3s ease,
-        opacity 0s linear 0.35s;
-}
-
-
-/*
-Hide the complete star immediately
-when the opening animation begins.
-*/
-
-.portfolio_Star.star_Open .star_Visual::before {
-    opacity: 0;
-
-    transition:
-        opacity 0s linear 0s,
-        color 0.3s ease,
         text-shadow 0.3s ease;
 }
 
 
 /*
-Show the two halves immediately
-while opening.
+Hide the complete star while
+opening or closing.
 */
 
-.portfolio_Star.star_Open .star_Half {
-    opacity: 1;
-
-    transition:
-        transform 0.35s ease,
-        color 0.3s ease,
-        text-shadow 0.3s ease,
-        opacity 0s linear 0s;
+.portfolio_Star.star_Open .star_Visual::before,
+.portfolio_Star.star_Closing .star_Visual::before {
+    opacity: 0;
 }
 
 
-/* Glow the complete closed star too */
+/*
+Keep the halves visible while
+opening or closing.
+*/
+
+.portfolio_Star.star_Open .star_Half,
+.portfolio_Star.star_Closing .star_Half {
+    opacity: 1;
+}
+
+
+/*
+Glow for the complete closed star.
+*/
 
 .portfolio_Star:hover .star_Visual::before,
 .portfolio_Star:focus-visible .star_Visual::before {
@@ -444,7 +435,9 @@ while opening.
 }
 
 
-/* Match the smaller mobile star size */
+/*
+Mobile size.
+*/
 
 @media (max-width: 700px) {
     .portfolio_Item .star_Visual::before {

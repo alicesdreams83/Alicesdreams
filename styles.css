@@ -49,12 +49,12 @@ body {
     object-fit: contain;
 }
 
-.head-text h1 {
+.head_Text h1 {
     margin: 0 0 10px;
     font-size: 42px;
 }
 
-.head-text p {
+.head_Text p {
     margin: 0;
     font-size: 18px;
 }
@@ -270,7 +270,7 @@ body {
         text-align: center;
     }
 
-    .head-text h1 {
+    .head_Text h1 {
         font-size: 32px;
     }
 
