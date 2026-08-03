@@ -746,3 +746,295 @@ Visible keyboard focus.
 
     outline-offset: 2px;
 }
+
+/* ------------------------------
+   Clickable portfolio cards
+------------------------------ */
+
+.media_Card {
+    appearance: none;
+    font: inherit;
+    text-align: left;
+
+    color: inherit;
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.media_Card:hover,
+.media_Card:focus-visible {
+    transform: translateY(-4px);
+
+    border-color: #f6d86f;
+
+    box-shadow:
+        0 0 16px rgba(255, 220, 95, 0.55);
+}
+
+.media_Card:focus-visible {
+    outline: 2px solid #fff3a6;
+    outline-offset: 3px;
+}
+
+.card_Title {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #fff4bd;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* ------------------------------
+   Large project viewer
+------------------------------ */
+
+.media_Viewer {
+    width:
+        min(1180px, calc(100% - 32px));
+
+    max-width: none;
+    max-height:
+        calc(100vh - 32px);
+
+    padding: 0;
+
+    border:
+        1px solid rgba(246, 216, 111, 0.75);
+
+    border-radius: 24px;
+
+    color: #ffffff;
+
+    background:
+        #130c2c;
+
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.75);
+
+    overflow: hidden;
+}
+
+.media_Viewer::backdrop {
+    background:
+        rgba(6, 3, 18, 0.82);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+/* Two-panel viewer layout */
+
+.viewer_Shell {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(280px, 0.75fr);
+
+    min-height:
+        min(720px, calc(100vh - 32px));
+}
+
+
+/* Large media side */
+
+.viewer_Media {
+    min-width: 0;
+    min-height: 420px;
+
+    padding: 30px;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(104, 70, 157, 0.32),
+            rgba(10, 6, 29, 0.96)
+        );
+
+    overflow: auto;
+}
+
+.viewer_Media img,
+.viewer_Media video {
+    display: block;
+
+    max-width: 100%;
+    max-height:
+        calc(100vh - 92px);
+
+    object-fit: contain;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 16px 50px rgba(0, 0, 0, 0.55);
+}
+
+
+/* Written information panel */
+
+.viewer_Info {
+    padding:
+        82px 34px 38px;
+
+    border-left:
+        1px solid rgba(246, 216, 111, 0.35);
+
+    background:
+        linear-gradient(
+            180deg,
+            #28144d,
+            #160d32
+        );
+
+    overflow-y: auto;
+}
+
+.viewer_Category {
+    margin:
+        0 0 12px;
+
+    color: #f6d86f;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.viewer_Info h2 {
+    margin:
+        0 0 24px;
+
+    color: #fff3a6;
+
+    font-size:
+        clamp(28px, 4vw, 42px);
+
+    line-height: 1.1;
+}
+
+.viewer_Description {
+    color:
+        rgba(255, 255, 255, 0.9);
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    white-space: pre-line;
+}
+
+
+/* Close button */
+
+.viewer_Close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    border:
+        1px solid rgba(246, 216, 111, 0.75);
+
+    border-radius: 50%;
+
+    color: #fff3a6;
+    background:
+        rgba(26, 13, 57, 0.92);
+
+    font-size: 34px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 16px rgba(255, 216, 80, 0.35);
+}
+
+.viewer_Close:hover,
+.viewer_Close:focus-visible {
+    background:
+        #56357f;
+
+    box-shadow:
+        0 0 24px rgba(255, 221, 96, 0.75);
+}
+
+.viewer_Close:focus-visible {
+    outline:
+        2px solid #fff3a6;
+
+    outline-offset: 3px;
+}
+
+
+/* Prevent background scrolling */
+
+body.viewer_Open {
+    overflow: hidden;
+}
+
+
+/* Mobile viewer layout */
+
+@media (max-width: 800px) {
+    .media_Viewer {
+        width:
+            calc(100% - 18px);
+
+        max-height:
+            calc(100vh - 18px);
+    }
+
+    .viewer_Shell {
+        display: block;
+
+        min-height: 0;
+        max-height:
+            calc(100vh - 18px);
+
+        overflow-y: auto;
+    }
+
+    .viewer_Media {
+        min-height: 300px;
+        max-height: 56vh;
+
+        padding:
+            70px 18px 22px;
+    }
+
+    .viewer_Media img,
+    .viewer_Media video {
+        max-height: 48vh;
+    }
+
+    .viewer_Info {
+        padding:
+            30px 24px 38px;
+
+        border-left: none;
+
+        border-top:
+            1px solid
+            rgba(246, 216, 111, 0.35);
+    }
+}

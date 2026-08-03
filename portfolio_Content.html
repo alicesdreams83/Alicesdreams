@@ -50,18 +50,39 @@
 
                 <div class="filmstrip_Track">
 
-                    <article class="portfolio_Card">
+                    <button
+    class="portfolio_Card media_Card"
+    type="button"
+    data-media-type="image"
+    data-media-src="project_test.png"
+    data-category="Graphic Design"
+>
+    <span class="card_Image">
 
-                        <div class="card_Image">
-                            <img
-                                src="project_test.png"
-                                alt="Preview of Project One"
-                            >
-                        </div>
+        <img
+            src="project_test.png"
+            alt="Preview of Project One"
+        >
 
-                        <h2>Project One</h2>
+    </span>
 
-                    </article>
+    <span class="card_Title">
+        Project One
+    </span>
+
+    <span
+        class="card_Description"
+        hidden
+    >
+        Write your project description here.
+
+        You can explain what the project was,
+        what programs or materials you used,
+        what inspired the design, and any
+        interesting challenges you solved.
+    </span>
+
+</button>
 
 
                     <article class="portfolio_Card">
@@ -170,3 +191,47 @@
     </div>
 
 </section>
+
+<dialog
+    class="media_Viewer"
+    id="media_Viewer"
+    aria-labelledby="media_Viewer_Title"
+>
+    <div class="viewer_Shell">
+
+        <button
+            class="viewer_Close"
+            id="viewer_Close"
+            type="button"
+            aria-label="Close project viewer"
+        >
+            ×
+        </button>
+
+
+        <div
+            class="viewer_Media"
+            id="viewer_Media"
+        ></div>
+
+
+        <aside class="viewer_Info">
+
+            <p
+                class="viewer_Category"
+                id="viewer_Category"
+            ></p>
+
+            <h2 id="media_Viewer_Title">
+                Project Title
+            </h2>
+
+            <div
+                class="viewer_Description"
+                id="viewer_Description"
+            ></div>
+
+        </aside>
+
+    </div>
+</dialog>

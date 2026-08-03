@@ -55,6 +55,7 @@ function setupPortfolio() {
     });
 
     setupFilmstripControls();
+    setupMediaViewer();
 }
 
 
@@ -162,6 +163,211 @@ function setupFilmstripControls() {
     });
 }
 
+/*
+Open images and videos in the
+large portfolio viewer.
+*/
+
+function setupMediaViewer() {
+    const viewer =
+        document.getElementById("media_Viewer");
+
+    const mediaArea =
+        document.getElementById("viewer_Media");
+
+    const titleArea =
+        document.getElementById(
+            "media_Viewer_Title"
+        );
+
+    const categoryArea =
+        document.getElementById(
+            "viewer_Category"
+        );
+
+    const descriptionArea =
+        document.getElementById(
+            "viewer_Description"
+        );
+
+    const closeButton =
+        document.getElementById("viewer_Close");
+
+    const mediaCards =
+        document.querySelectorAll(".media_Card");
+
+    if (
+        !viewer ||
+        !mediaArea ||
+        !titleArea ||
+        !categoryArea ||
+        !descriptionArea ||
+        !closeButton
+    ) {
+        return;
+    }
+
+
+    /*
+    Prevent duplicate event listeners.
+    */
+
+    if (viewer.dataset.viewerReady === "true") {
+        return;
+    }
+
+    viewer.dataset.viewerReady = "true";
+
+    let lastFocusedCard = null;
+
+
+    mediaCards.forEach(function (card) {
+        card.addEventListener(
+            "click",
+            function () {
+                openViewer(card);
+            }
+        );
+    });
+
+
+    function openViewer(card) {
+        const mediaType =
+            card.dataset.mediaType || "image";
+
+        const mediaSource =
+            card.dataset.mediaSrc;
+
+        const category =
+            card.dataset.category || "Portfolio";
+
+        const title =
+            card.querySelector(
+                ".card_Title"
+            )?.textContent.trim()
+            || "Portfolio Project";
+
+        const description =
+            card.querySelector(
+                ".card_Description"
+            )?.textContent.trim()
+            || "";
+
+        if (!mediaSource) {
+            return;
+        }
+
+        lastFocusedCard = card;
+
+        mediaArea.replaceChildren();
+
+        let mediaElement;
+
+
+        /*
+        Create a video when the card
+        uses data-media-type="video".
+        */
+
+        if (mediaType === "video") {
+            mediaElement =
+                document.createElement("video");
+
+            mediaElement.src = mediaSource;
+            mediaElement.controls = true;
+            mediaElement.playsInline = true;
+            mediaElement.preload = "metadata";
+
+            const poster =
+                card.dataset.mediaPoster;
+
+            if (poster) {
+                mediaElement.poster = poster;
+            }
+        }
+
+
+        /*
+        Otherwise create an image.
+        */
+
+        else {
+            mediaElement =
+                document.createElement("img");
+
+            mediaElement.src = mediaSource;
+
+            mediaElement.alt =
+                card.querySelector(
+                    ".card_Image img"
+                )?.alt || title;
+        }
+
+
+        mediaArea.appendChild(mediaElement);
+
+        titleArea.textContent = title;
+        categoryArea.textContent = category;
+
+        descriptionArea.textContent =
+            description;
+
+        document.body.classList.add(
+            "viewer_Open"
+        );
+
+        viewer.showModal();
+    }
+
+
+    function closeViewer() {
+        if (viewer.open) {
+            viewer.close();
+        }
+    }
+
+
+    closeButton.addEventListener(
+        "click",
+        closeViewer
+    );
+
+
+    /*
+    Clicking the dark background
+    closes the viewer.
+    */
+
+    viewer.addEventListener(
+        "click",
+        function (event) {
+            if (event.target === viewer) {
+                closeViewer();
+            }
+        }
+    );
+
+
+    /*
+    Clear video or image content
+    after the viewer closes.
+    */
+
+    viewer.addEventListener(
+        "close",
+        function () {
+            mediaArea.replaceChildren();
+
+            document.body.classList.remove(
+                "viewer_Open"
+            );
+
+            if (lastFocusedCard) {
+                lastFocusedCard.focus();
+            }
+        }
+    );
+}
 
 document.addEventListener(
     "pageContentLoaded",
