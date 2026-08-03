@@ -13,9 +13,7 @@ function setupPortfolio() {
 
             if (isOpen) {
                 /*
-                Begin closing:
-                remove the open position,
-                but keep the split halves visible.
+                Begin closing the category.
                 */
 
                 star.classList.remove("star_Open");
@@ -27,8 +25,8 @@ function setupPortfolio() {
                 );
 
                 /*
-                After the halves finish moving,
-                replace them with the solid star.
+                Replace the split copies with
+                the seamless star after closing.
                 */
 
                 closingTimer = setTimeout(function () {
@@ -39,7 +37,7 @@ function setupPortfolio() {
             }
             else {
                 /*
-                Open the star.
+                Open the category.
                 */
 
                 star.classList.remove(
@@ -54,6 +52,113 @@ function setupPortfolio() {
                 );
             }
         });
+    });
+
+    setupFilmstripControls();
+}
+
+
+/*
+Create scroll buttons for every filmstrip.
+*/
+
+function setupFilmstripControls() {
+    const filmstrips =
+        document.querySelectorAll(
+            ".portfolio_Filmstrip"
+        );
+
+    filmstrips.forEach(function (filmstrip) {
+        const track =
+            filmstrip.querySelector(
+                ".filmstrip_Track"
+            );
+
+        if (!track) {
+            return;
+        }
+
+        /*
+        Prevent duplicate buttons if the
+        setup function runs more than once.
+        */
+
+        if (
+            filmstrip.querySelector(
+                ".filmstrip_Arrow"
+            )
+        ) {
+            return;
+        }
+
+        const previousButton =
+            document.createElement("button");
+
+        previousButton.className =
+            "filmstrip_Arrow filmstrip_Previous";
+
+        previousButton.type = "button";
+
+        previousButton.setAttribute(
+            "aria-label",
+            "Scroll projects left"
+        );
+
+        previousButton.innerHTML = "&#10094;";
+
+
+        const nextButton =
+            document.createElement("button");
+
+        nextButton.className =
+            "filmstrip_Arrow filmstrip_Next";
+
+        nextButton.type = "button";
+
+        nextButton.setAttribute(
+            "aria-label",
+            "Scroll projects right"
+        );
+
+        nextButton.innerHTML = "&#10095;";
+
+
+        previousButton.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                track.scrollBy({
+                    left: -240,
+                    behavior: "smooth"
+                });
+            }
+        );
+
+
+        nextButton.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                track.scrollBy({
+                    left: 240,
+                    behavior: "smooth"
+                });
+            }
+        );
+
+
+        filmstrip.insertBefore(
+            previousButton,
+            track
+        );
+
+        filmstrip.appendChild(
+            nextButton
+        );
     });
 }
 

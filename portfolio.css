@@ -594,3 +594,155 @@ Mobile size.
         font-size: 128px;
     }
 }
+
+/* ------------------------------
+   Interactive filmstrip controls
+------------------------------ */
+
+/*
+The closed strip cannot intercept clicks.
+*/
+
+.portfolio_Filmstrip {
+    pointer-events: none;
+}
+
+
+/*
+The open strip can be scrolled and clicked.
+*/
+
+.portfolio_Star.star_Open
++ .portfolio_Filmstrip {
+    pointer-events: auto;
+}
+
+
+/*
+The large invisible button normally covers
+the filmstrip. Disable its central click area
+while it is open.
+*/
+
+.portfolio_Star.star_Open {
+    pointer-events: none;
+}
+
+
+/*
+The star end caps remain clickable,
+allowing the category to close.
+*/
+
+.portfolio_Star.star_Open .star_Half {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+
+/*
+Smooth scrolling for mouse, touchpad,
+touchscreen, and arrow controls.
+*/
+
+.filmstrip_Track {
+    padding-left: 54px;
+    padding-right: 54px;
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+
+    overscroll-behavior-inline: contain;
+    touch-action: pan-x;
+}
+
+
+/*
+Cards settle neatly into position.
+*/
+
+.portfolio_Card {
+    scroll-snap-align: start;
+}
+
+
+/*
+Shared arrow appearance.
+*/
+
+.filmstrip_Arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+
+    width: 40px;
+    height: 76px;
+
+    border:
+        1px solid rgba(255, 226, 111, 0.8);
+
+    border-radius: 20px;
+
+    color: #fff3a6;
+    background:
+        rgba(27, 15, 57, 0.9);
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 12px rgba(255, 218, 92, 0.45);
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+Arrow hover effect.
+*/
+
+.filmstrip_Arrow:hover,
+.filmstrip_Arrow:focus-visible {
+    background-color:
+        rgba(92, 58, 135, 0.96);
+
+    box-shadow:
+        0 0 18px rgba(255, 222, 104, 0.8);
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+
+/*
+Arrow positions.
+*/
+
+.filmstrip_Previous {
+    left: 8px;
+}
+
+.filmstrip_Next {
+    right: 8px;
+}
+
+
+/*
+Visible keyboard focus.
+*/
+
+.filmstrip_Arrow:focus-visible {
+    outline:
+        2px solid #fff3a6;
+
+    outline-offset: 2px;
+}
