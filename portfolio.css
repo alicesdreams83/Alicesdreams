@@ -1124,3 +1124,79 @@ body.viewer_Open {
         infinite
         alternate;
 }
+/* ------------------------------
+   Touchscreen star preview
+   ------------------------------ */
+
+   @keyframes star_Touch_Breathe {
+       0% {
+               transform:
+                           translateY(0)
+                                       scale(1.02);
+                                           }
+
+                                               100% {
+                                                       transform:
+                                                                   translateY(-3px)
+                                                                               scale(1.08);
+                                                                                   }
+                                                                                   }
+
+
+                                                                                   /*
+                                                                                   Touchscreens do not have a true hover state,
+                                                                                   so closed stars show their titles and gently
+                                                                                   animate before being opened.
+                                                                                   */
+
+                                                                                   @media (hover: none), (pointer: coarse) {
+                                                                                       .portfolio_Star:not(.star_Open):not(.star_Closing)
+                                                                                           .star_Label {
+                                                                                                   opacity: 1;
+
+                                                                                                           transform:
+                                                                                                                       translate(-50%, -50%)
+                                                                                                                                   scale(1);
+
+                                                                                                                                           box-shadow:
+                                                                                                                                                       0 0 14px rgba(255, 222, 104, 0.55),
+                                                                                                                                                                   0 0 28px rgba(111, 74, 176, 0.55);
+                                                                                                                                                                       }
+
+
+                                                                                                                                                                           .portfolio_Star:not(.star_Open):not(.star_Closing)
+                                                                                                                                                                               .star_Visual {
+                                                                                                                                                                                       animation:
+                                                                                                                                                                                                   star_Touch_Breathe
+                                                                                                                                                                                                               1.6s
+                                                                                                                                                                                                                           ease-in-out
+                                                                                                                                                                                                                                       infinite
+                                                                                                                                                                                                                                                   alternate;
+                                                                                                                                                                                                                                                       }
+
+
+                                                                                                                                                                                                                                                           .portfolio_Star:not(.star_Open):not(.star_Closing)
+                                                                                                                                                                                                                                                               .star_Visual::before {
+                                                                                                                                                                                                                                                                       animation:
+                                                                                                                                                                                                                                                                                   star_Hover_Glow
+                                                                                                                                                                                                                                                                                               1.2s
+                                                                                                                                                                                                                                                                                                           ease-in-out
+                                                                                                                                                                                                                                                                                                                       infinite
+                                                                                                                                                                                                                                                                                                                                   alternate;
+                                                                                                                                                                                                                                                                                                                                       }
+                                                                                                                                                                                                                                                                                                                                       }
+
+
+                                                                                                                                                                                                                                                                                                                                       /*
+                                                                                                                                                                                                                                                                                                                                       Respect reduced-motion device settings.
+                                                                                                                                                                                                                                                                                                                                       */
+
+                                                                                                                                                                                                                                                                                                                                       @media (prefers-reduced-motion: reduce) {
+                                                                                                                                                                                                                                                                                                                                           .portfolio_Star:not(.star_Open):not(.star_Closing)
+                                                                                                                                                                                                                                                                                                                                               .star_Visual,
+
+                                                                                                                                                                                                                                                                                                                                                   .portfolio_Star:not(.star_Open):not(.star_Closing)
+                                                                                                                                                                                                                                                                                                                                                       .star_Visual::before {
+                                                                                                                                                                                                                                                                                                                                                               animation: none;
+                                                                                                                                                                                                                                                                                                                                                                   }
+                                                                                                                                                                                                                                                                                                                                                                   }
